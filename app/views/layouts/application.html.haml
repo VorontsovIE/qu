@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %title Qu
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false
+    = javascript_include_tag 'application', 'data-turbolinks-track' => false
+    = csrf_meta_tags
+  %body
+    = yield
