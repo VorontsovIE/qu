@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Question:
+  = @answer.question
+%p
+  %b Answer text:
+  = @answer.answer_text
+%p
+  %b Mark score:
+  = @answer.mark_score
+%p
+  %b Answer group:
+  = @answer.answer_group
+
+= link_to 'Edit', edit_answer_path(@answer)
+\|
+= link_to 'Back', answers_path

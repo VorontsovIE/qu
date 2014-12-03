@@ -40,6 +40,9 @@ gem 'spring',        group: :development
 
 gem 'haml-rails'
 gem 'simple_form'
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
 
 group :development do
   gem "better_errors"
@@ -47,3 +50,5 @@ group :development do
 
   gem 'quiet_assets'
 end
+
+gem 'authlogic'
