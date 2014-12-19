@@ -12,8 +12,8 @@
   - @games.each do |game|
     %tr
       %td= game.title
-      %td= game.start
-      %td= game.finish
+      %td= l game.start
+      %td= l game.finish
       %td= link_to 'Show', game
       %td= link_to 'Edit', edit_game_path(game)
       %td= link_to 'Destroy', game, :method => :delete, :data => { :confirm => 'Are you sure?' }

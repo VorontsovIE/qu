@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  # devise_for :users
+  devise_for :users, skip: :registrations
+  devise_scope :user do
+    resource :registration,
+      only: [:new, :create, :edit, :update],
+      path: 'users',
+      path_names: { new: 'sign_up' },
+      controller: 'devise/registrations',
+      as: :user_registration do
+        get :cancel
+      end
+  end
+
   resources :answers
 
   resources :questions
@@ -9,7 +22,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'games#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
