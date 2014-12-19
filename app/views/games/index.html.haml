@@ -7,14 +7,12 @@
     %th Finish
     %th
     %th
-    %th
 
   - @games.each do |game|
     %tr
-      %td= game.title
+      %td= link_to game.title, game
       %td= l game.start
       %td= l game.finish
-      %td= link_to 'Show', game
       %td= link_to 'Edit', edit_game_path(game)
       %td= link_to 'Destroy', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

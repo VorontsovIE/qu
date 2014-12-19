@@ -2,10 +2,21 @@
 
 %p
   %b Game:
-  = @question.game
+  = link_to @question.game.title, @question.game
 %p
   %b Question text:
-  = @question.question_text
+  %pre= @question.question_text
+
+-# .new-answer
+-#   = link_to 'Добавить ответ', new_answer_path(question_id: @question)
+%ul.answers
+  %b Ответы:
+  %hr
+  - @question.answers.group_by(&:answer_group).each do |answer_group, group_of_answers|
+    = render partial: 'shared/answer_group', locals: {answer_group: answer_group, group_of_answers: group_of_answers}
+    %hr
+  .new-answer-group
+    = link_to 'Добавить вариант ответа в новую группу', new_answer_path(question_id: @question, answer_group: @question.new_answer_group_index)
 
 = link_to 'Edit', edit_question_path(@question)
 \|

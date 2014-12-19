@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
 
   # GET /answers/new
   def new
-    @answer = Answer.new
+    @answer = Answer.new(question_id: params[:question_id], answer_group: params[:answer_group])
   end
 
   # GET /answers/1/edit
@@ -28,7 +28,7 @@ class AnswersController < ApplicationController
 
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
+        format.html { redirect_to @answer.question, notice: 'Answer was successfully created.' }
         format.json { render :show, status: :created, location: @answer }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
+        format.html { redirect_to @answer.question, notice: 'Answer was successfully updated.' }
         format.json { render :show, status: :ok, location: @answer }
       else
         format.html { render :edit }

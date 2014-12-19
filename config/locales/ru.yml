@@ -24,6 +24,12 @@ ru:
   date:
     formats:
       default: "%H:%M (%d.%m.%Y)"
+      short: "%H:%M, %d.%m.%Y"
+      date: "%d.%m.%Y"
+      time: "%H:%M"
   time:
     formats:
       default: "%H:%M (%d.%m.%Y)"
+      short: "%H:%M, %d.%m.%Y"
+      date: "%d.%m.%Y"
+      time: "%H:%M"

@@ -10,8 +10,10 @@
 
   - @questions.each do |question|
     %tr
-      %td= question.game
-      %td= question.question_text
+      %td= link_to question.game.title, question.game
+      %td
+        = link_to question do
+          = truncate(question.question_text, length: 140)
       %td= link_to 'Show', question
       %td= link_to 'Edit', edit_question_path(question)
       %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' }

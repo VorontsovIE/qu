@@ -2,7 +2,7 @@
   = f.error_notification
 
   .form-inputs
-    = f.association :question
+    = f.association :question, label_method: ->(question) { truncate(question.question_text, length: 30) }
     = f.input :answer_text
     = f.input :mark_score
     = f.input :answer_group

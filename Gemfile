@@ -52,3 +52,6 @@ group :development do
 end
 
 gem 'devise'
+gem 'acts_as_list'
+gem 'draper'
+gem 'russian'

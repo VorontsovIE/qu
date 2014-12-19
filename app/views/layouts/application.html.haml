@@ -55,10 +55,19 @@
           = yield
         .col-lg-3
           .well.sidebar-nav
-            %h3 Sidebar
+            %h3 Игры
             %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Games", games_path
+              - Game.all.each do |game|
+                %li.nav-header Sidebar
+                %li
+                  = link_to game do
+                    = game.title
+                    %br
+                    = surround '(', ')' do
+                      - if game.start.to_date == game.finish.to_date 
+                        #{l game.start, :format => :time}–#{l game.finish, :format => :time}, #{l game.start, :format => :date}
+                      - else
+                        #{l game.start, :format => :short} – #{l game.finish, :format => :short}
       %footer
         %p 
         &copy;

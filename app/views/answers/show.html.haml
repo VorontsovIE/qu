@@ -2,7 +2,7 @@
 
 %p
   %b Question:
-  = @answer.question
+  = link_to truncate(@answer.question.question_text, length: 140), @answer.question
 %p
   %b Answer text:
   = @answer.answer_text

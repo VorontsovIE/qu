@@ -8,15 +8,13 @@
     %th Answer group
     %th
     %th
-    %th
 
   - @answers.each do |answer|
     %tr
-      %td= answer.question
-      %td= answer.answer_text
+      %td= link_to truncate(answer.question.question_text, length: 30), answer.question
+      %td= link_to answer.answer_text, answer
       %td= answer.mark_score
       %td= answer.answer_group
-      %td= link_to 'Show', answer
       %td= link_to 'Edit', edit_answer_path(answer)
       %td= link_to 'Destroy', answer, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

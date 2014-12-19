@@ -1,0 +1,4 @@
+.answer_group
+  %i #{answer_group}-я группа ответов:
+  = render partial: 'shared/answer', collection: group_of_answers
+= link_to 'Добавить вариант ответа в эту группу', new_answer_path(question_id: @question, answer_group: answer_group)

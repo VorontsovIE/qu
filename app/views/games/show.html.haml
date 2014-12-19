@@ -10,6 +10,11 @@
   %b Finish:
   = @game.finish
 
+.new-question
+  = link_to 'Добавить вопрос', new_question_path(game_id: @game)
+.questions
+  = render partial: 'shared/question', collection: @game.questions
+
 = link_to 'Edit', edit_game_path(@game)
 \|
 = link_to 'Back', games_path
