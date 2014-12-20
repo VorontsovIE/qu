@@ -32,11 +32,11 @@
 
           - if signed_in?
             .navbar-signed.pull-right
-              = succeed ", #{current_user.username}" do
-                = t :hello
-              = surround '(',')' do
-                = link_to 'редактировать', edit_user_registration_path
-
+              Привет, #{current_user.username}
+              = link_to edit_user_registration_path, class: 'edit-link' do
+                .edit-link
+              = link_to destroy_user_session_path, :method => :delete, class: 'logout-link' do
+                .logout-link
           - else
             = simple_form_for(User.new(remember_me: true), as: :user, url: new_user_session_path, html:{class: 'pull-right navbar-signin'}) do |f|
               %span.form-inputs
@@ -45,10 +45,13 @@
                 = f.input :remember_me, as: :hidden
 
               %span.form-actions
-                = f.button :submit, "Log in"
-              = link_to "Sign up", new_user_registration_path
-              = link_to "Forgot your password?", new_user_password_path 
-      .container
+                = f.button :submit, "Войти"
+              = link_to new_user_registration_path, class: 'signup-link' do
+                .signup-link
+              = link_to new_user_password_path class: 'forgot-password-link' do
+                .forgot-password-link
+
+    .container
       .row
         .col-lg-9
           = bootstrap_flash
@@ -58,7 +61,7 @@
             %h3 Игры
             %ul.nav.nav-list
               - Game.all.each do |game|
-                %li.nav-header Sidebar
+                -# %li.nav-header Игры
                 %li
                   = link_to game do
                     = game.title
@@ -71,5 +74,5 @@
       %footer
         %p 
         &copy;
-        Разработано командой 
-        = link_to 'летней школы "Слон"', 'https://vk.com/slon_ipm'
+        Разработано командой летней школы
+        = link_to '"Слон"', 'https://vk.com/slon_ipm'

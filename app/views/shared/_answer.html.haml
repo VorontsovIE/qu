@@ -1,3 +1,10 @@
 %li.answer
-  = link_to answer.answer_text, answer
-  (балл: #{answer.mark_score})
+  = link_to answer do
+    .answer_text><
+      = answer.answer_text
+      (балл: #{answer.mark_score})
+
+  = link_to edit_answer_path(answer), class: 'edit-link' do
+    .edit-link
+  = link_to answer_path(answer), :method => :delete, data: {confirm: 'Вы точно хотите удалить ответ?'}, class: 'delete-link' do
+    .delete-link

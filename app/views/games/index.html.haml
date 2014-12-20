@@ -2,9 +2,10 @@
 
 %table
   %tr
-    %th Title
-    %th Start
-    %th Finish
+    %th Название
+    %th Начало
+    %th Конец
+    %th Число вопросов
     %th
     %th
 
@@ -13,9 +14,15 @@
       %td= link_to game.title, game
       %td= l game.start
       %td= l game.finish
-      %td= link_to 'Edit', edit_game_path(game)
-      %td= link_to 'Destroy', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= game.questions.length
+      %td
+        = link_to edit_game_path(game), class: 'edit-link' do
+          .edit-link
+      %td
+        = link_to game, :method => :delete, class: 'delete-link', :data => { :confirm => 'Вы уверены, что хотите удалить игру?' } do
+          .delete-link
 
 %br
 
-= link_to 'New Game', new_game_path
+= link_to new_game_path, class: 'add-link' do
+  .add-link

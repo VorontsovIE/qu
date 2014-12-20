@@ -1,5 +1,7 @@
-%p#notice= notice
-
+= link_to edit_game_path(@game), class: 'edit-link' do
+  .edit-link
+= link_to game_path(@game), method: :delete, class: 'delete-link', data: {confirm: 'Вы уверены, что хотите удалить игру?'} do
+  .delete-link
 %p
   %b Title:
   = @game.title
@@ -10,10 +12,13 @@
   %b Finish:
   = @game.finish
 
-.new-question
-  = link_to 'Добавить вопрос', new_question_path(game_id: @game)
+%b Вопросы:
+= link_to new_question_path(game_id: @game), class: 'add-link' do
+  .add-link
+%hr
 .questions
-  = render partial: 'shared/question', collection: @game.questions
+  = render partial: 'shared/question', collection: @game.questions, spacer_template: 'shared/separator'
+%hr
 
 = link_to 'Edit', edit_game_path(@game)
 \|

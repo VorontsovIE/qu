@@ -1,5 +1,12 @@
 .question
-  = succeed ':' do
-    = question.position
   = link_to question do
-    = truncate(question.question_text, length: 140)
+    .question_text><
+      = succeed '. ' do
+        = question.position
+      = truncate(question.question_text, length: 140)
+  .question_num_answers
+    (ответов: #{question.num_answers})
+  = link_to edit_question_path(question), class: 'edit-link' do
+    .edit-link
+  = link_to question_path(question), method: :delete, class: 'delete-link' do
+    .delete-link

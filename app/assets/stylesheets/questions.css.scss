@@ -8,6 +8,15 @@
   a, a:visited {color: red;}
 }
 
-.question {
-  margin: 15px 5px;
+.question_text {
+  margin: 0;
+  padding: 15px 5px;
+  width: 650px;
+  display: inline-block;
+  &:hover { background-color: darkgray; }
+}
+
+.question_num_answers {
+  width: 100px;
+  display: inline-block;
 }

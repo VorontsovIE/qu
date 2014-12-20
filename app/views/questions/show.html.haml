@@ -1,8 +1,11 @@
-%p#notice= notice
+= link_to edit_question_path(@question), class: 'edit-link' do
+  .edit-link
+= link_to question_path(@question), method: :delete, class: 'delete-link', data: {confirm: 'Вы уверены, что хотите удалить вопрос?'} do
+  .delete-link
 
 %p
   %b Game:
-  = link_to @question.game.title, @question.game
+  = @question.game ? link_to(@question.game.title, @question.game) : 'Не прикреплен ни к одной игре'
 %p
   %b Question text:
   %pre= @question.question_text
@@ -11,12 +14,12 @@
 -#   = link_to 'Добавить ответ', new_answer_path(question_id: @question)
 %ul.answers
   %b Ответы:
+  = link_to new_answer_path(question_id: @question, answer_group: @question.new_answer_group_index), class: 'add-link' do
+    .add-link
   %hr
-  - @question.answers.group_by(&:answer_group).each do |answer_group, group_of_answers|
+  - @question.answers.group_by(&:answer_group).sort_by{|answer_group, answers| answer_group }.each do |answer_group, group_of_answers|
     = render partial: 'shared/answer_group', locals: {answer_group: answer_group, group_of_answers: group_of_answers}
     %hr
-  .new-answer-group
-    = link_to 'Добавить вариант ответа в новую группу', new_answer_path(question_id: @question, answer_group: @question.new_answer_group_index)
 
 = link_to 'Edit', edit_question_path(@question)
 \|

@@ -10,7 +10,7 @@
 
   - @questions.each do |question|
     %tr
-      %td= link_to question.game.title, question.game
+      %td= question.game ? link_to(question.game.title, question.game) : 'Не прикреплен ни к одной игре'
       %td
         = link_to question do
           = truncate(question.question_text, length: 140)

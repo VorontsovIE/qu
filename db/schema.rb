@@ -13,16 +13,19 @@
 
 ActiveRecord::Schema.define(version: 20141219164114) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "answers", force: true do |t|
     t.integer  "question_id"
     t.string   "answer_text"
     t.decimal  "mark_score",   precision: 7, scale: 2
-    t.integer  "answer_group",                         default: 0
+    t.integer  "answer_group",                         default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "games", force: true do |t|
     t.string   "title"
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 20141219164114) do
     t.integer  "position"
   end
 
-  add_index "questions", ["game_id"], name: "index_questions_on_game_id"
+  add_index "questions", ["game_id"], name: "index_questions_on_game_id", using: :btree
 
   create_table "user_answers", force: true do |t|
     t.integer  "question_id"
@@ -50,8 +53,8 @@ ActiveRecord::Schema.define(version: 20141219164114) do
     t.datetime "updated_at"
   end
 
-  add_index "user_answers", ["question_id"], name: "index_user_answers_on_question_id"
-  add_index "user_answers", ["user_id"], name: "index_user_answers_on_user_id"
+  add_index "user_answers", ["question_id"], name: "index_user_answers_on_question_id", using: :btree
+  add_index "user_answers", ["user_id"], name: "index_user_answers_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -69,7 +72,7 @@ ActiveRecord::Schema.define(version: 20141219164114) do
     t.string   "username"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

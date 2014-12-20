@@ -18,6 +18,13 @@ td, th {
   padding: 2px 7px;
 }
 
+hr.nonspaced {
+  margin: 0;
+  padding: 0;
+}
+
+h1 { font-size: 1.8em; }
+
 textarea {
   width: 700px;
   height: 160px;
@@ -26,6 +33,10 @@ textarea {
 }
 
 div.inlined { display: inline-block; }
+
+.navbar {
+  li:hover { background-color: darkgray; }
+}
 
 .navbar-signin {
   label {
@@ -45,4 +56,45 @@ div.inlined { display: inline-block; }
     width: 70px;
     height: 2em;
   }
+}
+
+.navbar-signed, .navbar-signin {
+  height: 32px;
+  padding: 5px;
+  position: relative;
+  bottom: 0;
+  margin: 9px 0;
+}
+
+.edit-link, .delete-link, .add-link, .logout-link, .signup-link, .forgot-password-link {
+  display: inline-block;
+  &:hover{ background-color: darkgray; }
+  background-size: 32px;
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+.edit-link {
+  background-image: image-url('edit.png');
+}
+
+.delete-link {
+  background-image: image-url('delete.png');
+}
+
+.add-link {
+  background-image: image-url('add.png');
+}
+
+.logout-link {
+  background-image: image-url('logout.png');
+}
+
+.signup-link {
+  background-image: image-url('signup.png');
+}
+.forgot-password-link {
+  background-image: image-url('forgot-password.png');
 }
