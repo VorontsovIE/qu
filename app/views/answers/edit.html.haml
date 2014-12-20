@@ -1,7 +1,5 @@
-%h1 Editing answer
+%h1
+  = backward_link_icon @answer.question
+  Редактировать вариант ответа
 
 = render 'form'
-
-= link_to 'Show', @answer
-\|
-= link_to 'Back', answers_path

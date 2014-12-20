@@ -4,12 +4,13 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game.order('start DESC').all.decorate
   end
 
   # GET /games/1
   # GET /games/1.json
   def show
+    @game = @game.decorate
   end
 
   # GET /games/new

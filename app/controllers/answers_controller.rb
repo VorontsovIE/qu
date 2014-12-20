@@ -4,12 +4,13 @@ class AnswersController < ApplicationController
   # GET /answers
   # GET /answers.json
   def index
-    @answers = Answer.all
+    @answers = Answer.all.decorate
   end
 
   # GET /answers/1
   # GET /answers/1.json
   def show
+    @answer = @answer.decorate
   end
 
   # GET /answers/new

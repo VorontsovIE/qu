@@ -1,15 +1,16 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :move_higher, :move_lower]
 
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.all.decorate
   end
 
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @question = @question.decorate
   end
 
   # GET /questions/new
@@ -54,9 +55,26 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
+    game = @question.game
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to game || games_path, notice: 'Question was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def move_higher
+    @question.move_higher
+    @question.save!
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
+
+  def move_lower
+    @question.move_lower
+    @question.save!
+    respond_to do |format|
       format.json { head :no_content }
     end
   end

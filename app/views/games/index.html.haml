@@ -1,6 +1,6 @@
-%h1 Listing games
+%h1 Игры
 
-%table
+%table.game
   %tr
     %th Название
     %th Начало
@@ -8,21 +8,20 @@
     %th Число вопросов
     %th
     %th
+    %th
 
   - @games.each do |game|
     %tr
-      %td= link_to game.title, game
+      %td.game-title.hover-emphasis
+        = link_to game do
+          .filler= game.title
       %td= l game.start
       %td= l game.finish
       %td= game.questions.length
-      %td
-        = link_to edit_game_path(game), class: 'edit-link' do
-          .edit-link
-      %td
-        = link_to game, :method => :delete, class: 'delete-link', :data => { :confirm => 'Вы уверены, что хотите удалить игру?' } do
-          .delete-link
+      %td= edit_link_icon edit_game_path(game)
+      %td= delete_link_icon game
+      %td= forward_link_icon game
 
 %br
 
-= link_to new_game_path, class: 'add-link' do
-  .add-link
+= add_link_icon new_game_path

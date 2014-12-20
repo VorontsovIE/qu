@@ -1,23 +1,22 @@
-%h1 Listing answers
+%h1 Ответы
 
 %table
   %tr
-    %th Question
-    %th Answer text
-    %th Mark score
-    %th Answer group
+    %th Вопрос
+    %th Ответ
+    %th Балл
+    %th Номер группы ответов
     %th
     %th
 
   - @answers.each do |answer|
     %tr
-      %td= link_to truncate(answer.question.question_text, length: 30), answer.question
+      %td= link_to answer.question.short_text(length: 30), answer.question
       %td= link_to answer.answer_text, answer
       %td= answer.mark_score
       %td= answer.answer_group
-      %td= link_to 'Edit', edit_answer_path(answer)
-      %td= link_to 'Destroy', answer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= edit_link_icon edit_answer_path(answer)
+      %td= delete_link_icon answer
 
 %br
-
-= link_to 'New Answer', new_answer_path
+= add_link_icon new_answer_path

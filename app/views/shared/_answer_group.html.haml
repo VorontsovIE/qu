@@ -1,5 +1,0 @@
-.answer_group
-  %i #{answer_group}-я группа ответов:
-  = link_to new_answer_path(question_id: @question, answer_group: answer_group), class: 'add-link' do
-    .add-link
-  = render partial: 'shared/answer', collection: group_of_answers

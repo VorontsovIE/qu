@@ -1,23 +1,20 @@
-%h1 Listing questions
+%h1 Список вопросов
 
 %table
   %tr
-    %th Game
-    %th Question text
+    %th Игра
+    %th Текст вопроса
     %th
     %th
     %th
 
   - @questions.each do |question|
     %tr
-      %td= question.game ? link_to(question.game.title, question.game) : 'Не прикреплен ни к одной игре'
-      %td
-        = link_to question do
-          = truncate(question.question_text, length: 140)
-      %td= link_to 'Show', question
-      %td= link_to 'Edit', edit_question_path(question)
-      %td= link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= question.game_link
+      %td= link_to question.short_text, question                
+      %td= edit_link_icon edit_question_path(question)
+      %td= delete_link_icon question
+      %td= forward_link_icon question
 
 %br
-
-= link_to 'New Question', new_question_path
+= add_link_icon new_question_path

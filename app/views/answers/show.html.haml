@@ -1,16 +1,15 @@
+= edit_link_icon edit_answer_path(@answer)
+= delete_link_icon answer_path(@answer)
+
 %p
-  %b Question:
+  %b Вопрос:
   = link_to truncate(@answer.question.question_text, length: 140), @answer.question
 %p
-  %b Answer text:
+  %b Ответ:
   = @answer.answer_text
 %p
-  %b Mark score:
+  %b Балл:
   = @answer.mark_score
 %p
-  %b Answer group:
+  %b Номер группы ответов:
   = @answer.answer_group
-
-= link_to 'Edit', edit_answer_path(@answer)
-\|
-= link_to 'Back', answers_path

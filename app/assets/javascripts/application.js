@@ -15,3 +15,15 @@
 //= require twitter/bootstrap
 //= not-require turbolinks
 //= require_tree .
+
+$(function(){
+  $('.ajax_post').click(function(event) {
+    event.preventDefault();
+    var obj = $(event.target);
+    $.ajax({url: obj.data('url'),
+            method: 'POST',
+            dataType: 'xml',
+            success: function(){ location.reload(); }
+            });
+  });
+});

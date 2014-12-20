@@ -1,3 +1,16 @@
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+table.game {
+  .game-title {
+    width: 350px;
+  }
+}
+
+table.questions {
+  width: 100%;
+  .question_text {
+    width: 590px;
+  }
+}

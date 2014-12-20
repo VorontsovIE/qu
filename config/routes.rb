@@ -14,7 +14,12 @@ Rails.application.routes.draw do
 
   resources :answers
 
-  resources :questions
+  resources :questions do
+    member do
+      post 'move_higher'
+      post 'move_lower'
+    end
+  end
 
   resources :games
 

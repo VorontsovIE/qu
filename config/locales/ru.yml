@@ -33,3 +33,23 @@ ru:
       short: "%H:%M, %d.%m.%Y"
       date: "%d.%m.%Y"
       time: "%H:%M"
+
+  activerecord:
+    models:
+      question: Вопрос
+      answer: Вариант ответа
+      game: Игра
+
+    attributes:
+      question:
+        question_text: Текст вопроса
+        game: Игра
+      game:
+        title: Название игры
+        start: Начало
+        finish: Конец
+      answer:
+        question: 'Вопрос'
+        answer_text: 'Ответ'
+        mark_score: 'Балл'
+        answer_group: 'Номер группы ответов'

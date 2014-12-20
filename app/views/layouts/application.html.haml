@@ -33,8 +33,7 @@
           - if signed_in?
             .navbar-signed.pull-right
               Привет, #{current_user.username}
-              = link_to edit_user_registration_path, class: 'edit-link' do
-                .edit-link
+              = edit_link_icon edit_user_registration_path
               = link_to destroy_user_session_path, :method => :delete, class: 'logout-link' do
                 .logout-link
           - else
@@ -72,6 +71,7 @@
                       - else
                         #{l game.start, :format => :short} – #{l game.finish, :format => :short}
       %footer
+        %hr
         %p 
         &copy;
         Разработано командой летней школы

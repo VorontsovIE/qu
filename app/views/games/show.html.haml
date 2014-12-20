@@ -1,25 +1,34 @@
-= link_to edit_game_path(@game), class: 'edit-link' do
-  .edit-link
-= link_to game_path(@game), method: :delete, class: 'delete-link', data: {confirm: 'Вы уверены, что хотите удалить игру?'} do
-  .delete-link
+= edit_link_icon edit_game_path(@game)
+= delete_link_icon game_path(@game)
+
 %p
-  %b Title:
+  %b Название игры:
   = @game.title
 %p
-  %b Start:
+  %b Начало:
   = @game.start
 %p
-  %b Finish:
+  %b Конец:
   = @game.finish
 
-%b Вопросы:
-= link_to new_question_path(game_id: @game), class: 'add-link' do
-  .add-link
-%hr
-.questions
-  = render partial: 'shared/question', collection: @game.questions, spacer_template: 'shared/separator'
 %hr
 
-= link_to 'Edit', edit_game_path(@game)
-\|
-= link_to 'Back', games_path
+%b Вопросы:
+= add_link_icon new_question_path(game_id: @game)
+%hr
+
+%table.questions
+  - @game.questions.each do |question|
+    %tr
+      %td
+        = up_link_icon move_higher_question_path(question)
+        = down_link_icon move_lower_question_path(question)
+      %td.question_text.hover-emphasis
+        = link_to question_path(question) do
+          .filler= question.enumerated_short_text(length: 140)
+      %td (ответов: #{question.num_answers})
+      -# .up.ajax_post{data: {url: move_higher_question_path(question)}}
+      -# %td.down.ajax_post{data: {url: move_lower_question_path(question)}} down
+      %td= edit_link_icon edit_question_path(question)
+      %td= delete_link_icon question_path(question)
+      %td= forward_link_icon question
