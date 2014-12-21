@@ -1,5 +1,7 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy, :move_higher, :move_lower]
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :move_higher, :move_lower, :answer]
+  before_action :authenticate!, only: [:answer]
+  before_action :authenticate_admin!, except: [:show, :answer]
 
   # GET /questions
   # GET /questions.json
@@ -77,6 +79,17 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       format.json { head :no_content }
     end
+  end
+
+  def answer
+    @user_answer = UserAnswer.new(params.require(:user_answer).permit(:answer_text))
+    @user_answer.question = @question
+    @user_answer.user = current_user
+
+    # @user_answer.answer = @user_answer.find_associated_answer
+
+    @user_answer.save!
+    redirect_to @question
   end
 
   private

@@ -5,7 +5,18 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]
 
+  has_many :user_answers, inverse_of: :user, dependent: :destroy
   validates :username, presence: true,  uniqueness: {case_sensitive: false}
+
+  # TODO
+  def admin?
+    username == 'admin'
+  end
+
+  def player?
+    username != 'admin'
+  end
+
 
   def login=(login)
     @login = login

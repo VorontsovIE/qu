@@ -11,4 +11,13 @@ protected
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
+
+  def authenticate_admin!
+    redirect_to(root_path, alert: 'Доступ запрещен') unless current_user && current_user.admin?
+    false
+  end
+  def authenticate!
+    redirect_to(new_user_session_path, alert: 'Войдите в систему') unless signed_in?
+    false
+  end
 end

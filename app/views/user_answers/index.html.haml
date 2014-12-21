@@ -1,0 +1,27 @@
+%h1 Ответы пользователей
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @user_answers.each do |user_answer|
+      %tr
+        %td.user_answer_text
+          = link_to user_answer do
+            .filler= user_answer.answer_colored
+        %td= user_answer.mark_score
+        %td= user_answer.user_link
+        %td= edit_link_icon edit_user_answer_path(user_answer)
+        %td= delete_link_icon user_answer
+        %td= forward_link_icon user_answer
+
+%br
+
+= link_to 'Новый ответ пользователя', new_user_answer_path

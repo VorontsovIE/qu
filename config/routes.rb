@@ -12,12 +12,15 @@ Rails.application.routes.draw do
       end
   end
 
+  resources :users
   resources :answers
+  resources :user_answers
 
   resources :questions do
     member do
       post 'move_higher'
       post 'move_lower'
+      post 'answer'
     end
   end
 

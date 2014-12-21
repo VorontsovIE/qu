@@ -39,6 +39,7 @@ ru:
       question: Вопрос
       answer: Вариант ответа
       game: Игра
+      user_answer: 'Ответ'
 
     attributes:
       question:
@@ -53,3 +54,9 @@ ru:
         answer_text: 'Ответ'
         mark_score: 'Балл'
         answer_group: 'Номер группы ответов'
+      user_answer:
+        answer: 'Угаданный вариант ответа'
+        answer_text: 'Ответ'
+        user: 'Пользователь'
+        question: 'Вопрос'
+        mark_score: 'Балл'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219164114) do
+ActiveRecord::Schema.define(version: 20141220203221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,11 +48,14 @@ ActiveRecord::Schema.define(version: 20141219164114) do
   create_table "user_answers", force: true do |t|
     t.integer  "question_id"
     t.integer  "user_id"
-    t.decimal  "mark",        precision: 7, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "answer_text",                         default: "",  null: false
+    t.integer  "answer_id"
+    t.decimal  "mark_score",  precision: 7, scale: 2, default: 0.0
   end
 
+  add_index "user_answers", ["answer_id"], name: "index_user_answers_on_answer_id", using: :btree
   add_index "user_answers", ["question_id"], name: "index_user_answers_on_question_id", using: :btree
   add_index "user_answers", ["user_id"], name: "index_user_answers_on_user_id", using: :btree
 

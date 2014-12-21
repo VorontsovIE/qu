@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
   validates :position, uniqueness: {scope: :game}
   acts_as_list scope: :game
   has_many :answers, inverse_of: :question, dependent: :destroy
+  has_many :user_answers, -> { order("created_at DESC") }, inverse_of: :question, dependent: :destroy
 
   def new_answer_group_index
     (answers.map(&:answer_group).max || 0) + 1

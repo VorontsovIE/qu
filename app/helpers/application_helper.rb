@@ -1,4 +1,15 @@
 module ApplicationHelper
+
+  def admin_only
+    yield if current_user && current_user.admin?
+    nil
+  end
+
+  def player_only
+    yield if current_user && current_user.player?
+    nil
+  end
+
   def forward_link_icon(path)
     link_to path, class: 'forward-link' do
       content_tag :div, '', class: 'forward-link'

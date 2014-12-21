@@ -6,9 +6,10 @@
     %th Начало
     %th Конец
     %th Число вопросов
-    %th
-    %th
-    %th
+    = admin_only do
+      %th
+      %th
+      %th
 
   - @games.each do |game|
     %tr
@@ -18,10 +19,11 @@
       %td= l game.start
       %td= l game.finish
       %td= game.questions.length
-      %td= edit_link_icon edit_game_path(game)
-      %td= delete_link_icon game
+      = admin_only do
+        %td= edit_link_icon edit_game_path(game)
+        %td= delete_link_icon game
       %td= forward_link_icon game
 
-%br
-
-= add_link_icon new_game_path
+= admin_only do
+  %br
+  = add_link_icon new_game_path

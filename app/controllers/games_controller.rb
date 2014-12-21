@@ -1,5 +1,13 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :check_contest_started, only: [:show]
+
+  def check_contest_started
+    unless current_user && current_user.admin?
+      redirect_to(games_path, alert: 'Соревнование еще не началось')  if Time.now < @game.start
+      false
+    end
+  end
 
   # GET /games
   # GET /games.json

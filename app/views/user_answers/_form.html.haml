@@ -1,0 +1,11 @@
+= simple_form_for(@user_answer) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :question, label_method: ->(question) { truncate(question.question_text, length: 30) }
+    = f.association :user, label_method: :username
+    = f.input :answer_text
+    = f.input :mark_score
+
+  .form-actions
+    = f.button :submit

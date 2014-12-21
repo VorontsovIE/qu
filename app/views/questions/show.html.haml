@@ -1,6 +1,7 @@
 = backward_link_icon @question.game
-= edit_link_icon edit_question_path(@question)
-= delete_link_icon question_path(@question)
+= admin_only do
+  = edit_link_icon edit_question_path(@question)
+  = delete_link_icon question_path(@question)
 %span.game
   = surround '(', ')' do
     Вопрос используется в игре:
@@ -10,20 +11,30 @@
   %b Текст вопроса:
   %pre= @question.question_text
 
-.answers
-  = add_link_icon new_answer_path(question_id: @question, answer_group: @question.new_answer_group_index)
-  %b Ответы:
-  %br
-  - @question.each_answer_group do |answer_group_index, group_of_answers|
-    .answer_group
-      %i #{answer_group_index}-я группа ответов:
-      = add_link_icon new_answer_path(question_id: @question, answer_group: answer_group_index)
-      %table
-        - group_of_answers.each do |answer|
-          %tr.answer
-            %td.answer_text
-              = link_to answer do
-                .filler= answer.answer_text
-            %td (балл: #{answer.mark_score})
-            %td= edit_link_icon edit_answer_path(answer)
-            %td= delete_link_icon answer_path(answer)
+= player_only do
+  = simple_form_for UserAnswer.new(question_id: @question.id), as: :user_answer, url: answer_question_path(@question) do |f|
+    = f.input :question_id, as: :hidden
+    = f.input :answer_text
+    = f.submit 'Ответить'
+  .given_answers
+    - @question.user_answers.each do |user_answer|
+      .user_answer= user_answer.answer_colored
+
+= admin_only do
+  .answers
+    = add_link_icon new_answer_path(question_id: @question, answer_group: @question.new_answer_group_index)
+    %b Ответы:
+    %br
+    - @question.each_answer_group do |answer_group_index, group_of_answers|
+      .answer_group
+        %i #{answer_group_index}-я группа ответов:
+        = add_link_icon new_answer_path(question_id: @question, answer_group: answer_group_index)
+        %table
+          - group_of_answers.each do |answer|
+            %tr.answer
+              %td.answer_text
+                = link_to answer do
+                  .filler= answer.answer_text
+              %td (балл: #{answer.mark_score})
+              %td= edit_link_icon edit_answer_path(answer)
+              %td= delete_link_icon answer_path(answer)

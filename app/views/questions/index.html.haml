@@ -4,17 +4,20 @@
   %tr
     %th Игра
     %th Текст вопроса
-    %th
-    %th
-    %th
+    = admin_only do
+      %th
+      %th
+      %th
 
   - @questions.each do |question|
     %tr
       %td= question.game_link
-      %td= link_to question.short_text, question                
-      %td= edit_link_icon edit_question_path(question)
-      %td= delete_link_icon question
+      %td= link_to question.short_text, question
+      = admin_only do
+        %td= edit_link_icon edit_question_path(question)
+        %td= delete_link_icon question
       %td= forward_link_icon question
 
-%br
-= add_link_icon new_question_path
+= admin_only do
+  %br
+  = add_link_icon new_question_path

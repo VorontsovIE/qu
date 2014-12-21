@@ -32,7 +32,7 @@
 
           - if signed_in?
             .navbar-signed.pull-right
-              Привет, #{current_user.username}
+              Привет, #{current_user.decorate.user_link}
               = edit_link_icon edit_user_registration_path
               = link_to destroy_user_session_path, :method => :delete, class: 'logout-link' do
                 .logout-link
