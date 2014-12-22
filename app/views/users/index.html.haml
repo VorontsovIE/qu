@@ -1,19 +1,26 @@
-%h1 Listing users
+%h1 Пользователи
 
 %table
   %thead
     %tr
-      %th
-      %th
-      %th
+      %th Пользователь
+      %th Число сыгранных игр
+      %th Общий счет
+      %th Зарегистрирован
       
   %tbody
     - @users.each do |user|
       %tr
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= user.user_link
+        %td= user.num_games
+        %td
+          %span.total_score= user.total_score
+          из
+          %span.max_score= user.max_score
+          = surround '(', ')' do
+            = succeed '%' do
+              = 100.0 * (user.total_score / user.max_score).round(2)
+        %td= user.created_at
+
 
 %br
-
-= link_to 'New User', new_user_path

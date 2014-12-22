@@ -11,8 +11,9 @@ Rails.application.routes.draw do
         get :cancel
       end
   end
+  get 'user/:id' => 'users#show', as: 'user'
+  get 'users' => 'users#index'
 
-  resources :users
   resources :answers
   resources :user_answers
 

@@ -191,3 +191,11 @@ div.inlined { display: inline-block; }
 .answers-link {
   background-image: image-url('answers.png');
 }
+
+.email_info {
+  font-weight: bolder;
+  margin: 15px 0;
+  .email_label {
+    margin-right: 5px;
+  }
+}

@@ -1,8 +1,11 @@
-= backward_link_icon user_results_game_path(@question.game, user_id: @user.id)
-%span.game
-  = surround '(', ')' do
-    Вопрос используется в игре:
-    %em= @question.game_link
+.player
+  = backward_link_icon user_results_game_path(@question.game, user_id: @user.id)
+  %span Ответ игрока #{@user.user_link}
+.game
+  %span
+    = surround '(', ')' do
+      Вопрос используется в игре:
+      %em= @question.game_link
 .question_text
   %b Текст вопроса:
   %pre= @question.question_text
