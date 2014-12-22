@@ -86,11 +86,27 @@ div.inlined { display: inline-block; }
 }
 
 .correct-answer {
+  color: lightgreen;
+}
+
+.best-correct-answer {
   color: green;
 }
 
 .incorrect-answer {
   color: red;
+}
+
+.answer_notify {
+  color: lighten(red, 30%);
+}
+
+.total_score {
+  color: green;
+  font-weight: bolder;
+}
+.max_score {
+  color: green;
 }
 
 .user-link {
@@ -110,14 +126,14 @@ div.inlined { display: inline-block; }
   }
 }
 
-.edit-link, .delete-link, .add-link, .logout-link, .signup-link, .forgot-password-link, .forward-link, .backward-link, .up-link, .down-link {
+.edit-link, .delete-link, .add-link, .logout-link, .signup-link, .forgot-password-link, .forward-link, .backward-link, .up-link, .down-link, .leaderboard-link, .answers-link {
   display: inline-block;
   &:hover{ background-color: darkgray; }
   vertical-align: middle;
   margin: 0;
 }
 
-.edit-link, .delete-link, .add-link, .logout-link, .signup-link, .forgot-password-link, .forward-link, .backward-link {
+.edit-link, .delete-link, .add-link, .logout-link, .signup-link, .forgot-password-link, .forward-link, .backward-link, .leaderboard-link, .answers-link {
   background-size: 32px;
   width: 32px;
   height: 32px;
@@ -167,4 +183,11 @@ div.inlined { display: inline-block; }
 
 .down-link {
   background-image: image-url('down.png');
+}
+
+.leaderboard-link {
+  background-image: image-url('leaderboard.png');
+}
+.answers-link {
+  background-image: image-url('answers.png');
 }

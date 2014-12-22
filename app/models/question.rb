@@ -18,4 +18,20 @@ class Question < ActiveRecord::Base
       .sort_by{|answer_group, answers| answer_group }
       .each(&block)
   end
+
+  def each_correct_user_answer_group(&block)
+    user_answers.correct.group_by(&:answer_group).sort_by{|answer_group_index, group_of_answers| group_of_answers.map(&:updated_at).max }.reverse.each(&block)
+  end
+
+  def total_score(user)
+    UserAnswer.by_question(self).by_user(user).includes(:answer).correct.group_by(&:answer_group).map{|ans_gr_index, group_of_answers|
+      group_of_answers.map(&:mark_score).max
+    }.inject(0.0, &:+)
+  end
+
+  def max_score
+    answers.group_by(&:answer_group).map{|ans_gr_index, group_of_answers|
+      group_of_answers.map(&:mark_score).max
+    }.inject(0.0, &:+)
+  end
 end

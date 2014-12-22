@@ -21,10 +21,16 @@ Rails.application.routes.draw do
       post 'move_higher'
       post 'move_lower'
       post 'answer'
+      get 'user_answers/:user_id', action: 'user_answers', as: 'user_answers'
     end
   end
 
-  resources :games
+  resources :games do
+    member do
+      get 'results'
+      get 'user_results/:user_id', action: 'user_results', as: 'user_results'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

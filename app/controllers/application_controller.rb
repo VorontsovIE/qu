@@ -20,4 +20,8 @@ protected
     redirect_to(new_user_session_path, alert: 'Войдите в систему') unless signed_in?
     false
   end
+
+  def signed_in_as_admin?
+    current_user && current_user.admin?
+  end
 end

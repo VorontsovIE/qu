@@ -1,13 +1,7 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
-  before_action :check_contest_started, only: [:show]
-
-  def check_contest_started
-    unless current_user && current_user.admin?
-      redirect_to(games_path, alert: 'Соревнование еще не началось')  if Time.now < @game.start
-      false
-    end
-  end
+  before_action :authenticate_admin!, except: [:index, :show, :results]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :results, :user_results]
+  before_action :check_game_open!, only: [:show, :edit, :update, :destroy]
 
   # GET /games
   # GET /games.json
@@ -70,6 +64,15 @@ class GamesController < ApplicationController
     end
   end
 
+  def results
+    @game = @game.decorate
+  end
+
+  def user_results
+    @game = @game.decorate
+    @user = User.find(params[:user_id]).decorate
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
@@ -79,5 +82,12 @@ class GamesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
       params.require(:game).permit(:title, :start, :finish)
+    end
+
+    def check_game_open!
+      unless signed_in_as_admin? || @game.started?
+        redirect_to root_path, alert: 'Соревнование еще не началось'
+        false
+      end
     end
 end

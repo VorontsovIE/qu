@@ -1,0 +1,13 @@
+.given_answers
+  %span.total_score Общий балл: #{question.total_score(user)}
+  %span.max_score (максимум: #{question.max_score})
+  .correct_answers
+    - UserAnswer.by_question(question).by_user(user).includes(:answer).correct.decorate.group_by(&:answer_group).sort_by{|ans_gr_index, group_of_answers| group_of_answers.map(&:updated_at).max }.reverse_each do |answer_group_index, group_of_answers|
+      .user_answer_group
+        - group_of_answers.sort_by(&:mark_score).reverse.each do |user_answer|
+          %span.user_answer= user_answer.answer_colored
+        - unless group_of_answers.sort_by(&:mark_score).reverse.first.best_answer_in_group?
+          %span.answer_notify (ответ можно уточнить и получить дополнительные баллы)
+  .incorrect_answers
+    - UserAnswer.by_question(question).by_user(user).includes(:answer).incorrect.decorate.each do |user_answer|
+      .user_answer= user_answer.answer_colored

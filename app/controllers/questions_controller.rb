@@ -1,7 +1,9 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy, :move_higher, :move_lower, :answer]
-  before_action :authenticate!, only: [:answer]
+  before_action :authenticate!, except: [:show]
   before_action :authenticate_admin!, except: [:show, :answer]
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :move_higher, :move_lower, :answer, :user_answers]
+  before_action :check_question_open!, only: [:show]
+  before_action :check_question_in_play!, only: [:answer]
 
   # GET /questions
   # GET /questions.json
@@ -88,8 +90,16 @@ class QuestionsController < ApplicationController
 
     # @user_answer.answer = @user_answer.find_associated_answer
 
-    @user_answer.save!
-    redirect_to @question
+    if @user_answer.save
+      redirect_to @question
+    else
+      redirect_to @question, alert: @user_answer.errors.full_messages
+    end
+  end
+
+  def user_answers
+    @question = @question.decorate
+    @user = User.find(params[:user_id]).decorate
   end
 
   private
@@ -101,5 +111,19 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:game_id, :question_text)
+    end
+
+    def check_question_open!
+      unless signed_in_as_admin? || @question.game.started?
+        redirect_to root_path, alert: 'Соревнование еще не началось'
+        false
+      end
+    end
+
+    def check_question_in_play!
+      unless signed_in_as_admin? || @question.game.in_play?
+        redirect_to root_path, alert: (@question.game.finished? ? 'Соревнование уже закончилось' : 'Соревнование еще не началось')
+        false
+      end
     end
 end

@@ -11,14 +11,13 @@
   %b Текст вопроса:
   %pre= @question.question_text
 
-= player_only do
+- player_only do
   = simple_form_for UserAnswer.new(question_id: @question.id), as: :user_answer, url: answer_question_path(@question) do |f|
     = f.input :question_id, as: :hidden
     = f.input :answer_text
     = f.submit 'Ответить'
-  .given_answers
-    - @question.user_answers.each do |user_answer|
-      .user_answer= user_answer.answer_colored
+
+  = render partial: 'user_answers', locals: {question: @question, user: current_user}
 
 = admin_only do
   .answers

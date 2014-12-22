@@ -29,4 +29,8 @@ class QuestionDecorator < Draper::Decorator
     "#{object.position}. #{short_text(length: length)}".html_safe
   end
 
+  def certain_user_answers(user)
+    object.certain_user_answers(user).decorate
+  end
+
 end

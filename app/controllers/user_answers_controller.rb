@@ -1,6 +1,6 @@
 class UserAnswersController < ApplicationController
-  before_action :set_user_answer, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!
+  before_action :set_user_answer, only: [:show, :edit, :update, :destroy]
   # GET /user_answers
   # GET /user_answers.json
   def index

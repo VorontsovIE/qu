@@ -26,6 +26,11 @@ class User < ActiveRecord::Base
     @login || self.username || self.email
   end
 
+  def participant?(game)
+    UserAnswer.where(question: game.questions, user: self).count > 0
+    # Game.questions.pluck(:id)
+  end
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

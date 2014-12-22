@@ -1,0 +1,20 @@
+= backward_link_icon results_game_path(@game)
+%span Игра #{@game.game_link}
+.game_result
+  %span.player Результат игрока #{@user.user_link}:
+  %span.total_score= @game.total_score(@user)
+  из
+  %span.max_score= @game.max_score
+%table.results
+  %tr
+    %th Вопрос
+    %th Общий балл
+    %th
+  - @game.questions.each do |question|
+    %tr
+      %td= question.short_text(length: 140)
+      %td
+        %span.total_score= question.total_score(@user)
+        из
+        %span.max_score= question.max_score
+      %td= answers_link_icon user_answers_question_path(question, user_id: @user.id)

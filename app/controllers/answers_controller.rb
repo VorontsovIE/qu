@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
 
   # GET /answers
@@ -57,7 +58,7 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy
     respond_to do |format|
-      format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }
+      format.html { redirect_to @answer.question, notice: 'Answer was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

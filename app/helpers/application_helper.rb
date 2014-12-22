@@ -40,6 +40,18 @@ module ApplicationHelper
     end
   end
 
+  def leadeboard_link_icon(path)
+    link_to path, class: 'leaderboard-link' do
+      content_tag :div, '', class: 'leaderboard-link'
+    end
+  end
+
+  def answers_link_icon(path)
+    link_to path, class: 'answers-link' do
+      content_tag :div, '', class: 'answers-link'
+    end
+  end
+
   def up_link_icon(path)
     content_tag :div, '', class: 'up-link ajax_post', data: {url: path}
   end

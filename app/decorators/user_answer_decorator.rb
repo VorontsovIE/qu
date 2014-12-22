@@ -22,7 +22,11 @@ class UserAnswerDecorator < Draper::Decorator
 
   def answer_colored
     if object.correct?
-      h.content_tag :span, "#{object.answer_text} (#{object.mark_score})", class: 'correct-answer'
+      if object.best_answer_in_group?
+        h.content_tag :span, "#{object.answer_text} (#{object.mark_score})", class: 'best-correct-answer'
+      else
+        h.content_tag :span, "#{object.answer_text} (#{object.mark_score})", class: 'correct-answer'
+      end
     else
       h.content_tag :span, "#{object.answer_text}", class: 'incorrect-answer'
     end

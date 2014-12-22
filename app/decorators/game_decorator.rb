@@ -10,4 +10,8 @@ class GameDecorator < Draper::Decorator
   #     end
   #   end
 
+  def game_link
+    h.link_to object.title, object
+  end
+
 end

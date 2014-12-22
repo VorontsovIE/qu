@@ -1,0 +1,20 @@
+= backward_link_icon @game
+%span Игра #{@game.game_link}
+%table.results
+  %tr
+    %th Место
+    %th Пользователь
+    %th Общий балл
+    - admin_only do
+      %th
+  - User.all.decorate.select{|user| user.participant?(@game.object) }.sort_by{|user| @game.total_score(user) }.reverse.chunk{|user| @game.total_score(user) }.each_with_index do |(_total_score ,users), place|
+    - users.each do |user|
+      %tr
+        %td= place + 1
+        %td= user.user_link
+        %td= @game.total_score(user)
+        - admin_only do
+          %td= answers_link_icon user_results_game_path(user_id: user.id)
+
+-# - admin_only do
+-#   = render partial: 'questions/user_answers', locals: {question: question, user: user}
