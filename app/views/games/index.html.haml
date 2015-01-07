@@ -22,7 +22,7 @@
       = admin_only do
         %td= edit_link_icon edit_game_path(game)
         %td= delete_link_icon game
-        %td= link_to 'ответы', user_answers_path(game_id: game.id)
+        %td= link_to 'ответы', user_answers_path(game_id: game.id, limit: 30)
       %td= forward_link_icon game
 
 = admin_only do

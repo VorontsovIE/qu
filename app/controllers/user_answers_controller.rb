@@ -5,11 +5,13 @@ class UserAnswersController < ApplicationController
   # GET /user_answers.json
   def index
     if params[:game_id]
-      @user_answers = Game.find(params[:game_id]).user_answers.decorate
+      @user_answers = Game.find(params[:game_id]).user_answers.order('created_at DESC')
       # UserAnswer.where(game: params[:game_id]).order('created_at DESC').all.decorate
     else
-      @user_answers = UserAnswer.order('created_at DESC').all.decorate
+      @user_answers = UserAnswer.order('created_at DESC')
     end
+    @user_answers = @user_answers.limit(params[:limit].to_i)  if params[:limit]
+    @user_answers = @user_answers.decorate
   end
 
   # GET /user_answers/1

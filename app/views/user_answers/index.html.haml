@@ -10,6 +10,7 @@
       %th
       %th
       %th
+      %th
       
   %tbody
     - @user_answers.each do |user_answer|
@@ -17,6 +18,7 @@
         %td.user_answer_text
           = link_to user_answer do
             .filler= user_answer.answer_colored
+        %td= l user_answer.created_at
         %td
           = link_to user_answer.question.game do
             = user_answer.question.game.title
