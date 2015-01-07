@@ -8,3 +8,28 @@
 
   .form-actions
     = f.button :submit
+- if @question.persisted?
+  .pictures
+    - @question.pictures.each do |picture|
+      .picture.inline-block
+        .img= image_tag picture.image, height: 200, width: 200
+        .link= delete_link_icon picture_path(picture)
+    = simple_form_for Picture.new(question: @question) do |f|
+      = f.error_notification
+      = f.input :question_id, as: :hidden
+      = f.input :image, as: :file, input_html: {accept: 'image/*'}, label: false, wrapper_tag: 'span', input_html: {style:'display:inline-block;'}
+      %span.form-actions.inline_block
+        = f.button :submit, 'Добавить картинку'
+
+  .documents
+    - @question.documents.each do |document|
+      .document
+        = delete_link_icon document_path(document)
+        = link_to document.filename, document.file.url
+    = simple_form_for Document.new(question: @question) do |f|
+      = f.error_notification
+      = f.input :question_id, as: :hidden
+      = f.input :filename
+      = f.input :file, as: :file, label: false #, wrapper_tag: 'span', input_html: {style:'display:inline-block;'}
+      .form-actions
+        = f.button :submit, 'Добавить файл'

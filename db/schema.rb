@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141220203221) do
+ActiveRecord::Schema.define(version: 20150106231020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,13 +19,24 @@ ActiveRecord::Schema.define(version: 20141220203221) do
   create_table "answers", force: true do |t|
     t.integer  "question_id"
     t.string   "answer_text"
-    t.decimal  "mark_score",   precision: 7, scale: 2
-    t.integer  "answer_group",                         default: 1
+    t.decimal  "mark_score",        precision: 7, scale: 2
+    t.integer  "answer_group",                              default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "normalized_answer"
   end
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+
+  create_table "documents", force: true do |t|
+    t.string   "file"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "filename"
+  end
+
+  add_index "documents", ["question_id"], name: "index_documents_on_question_id", using: :btree
 
   create_table "games", force: true do |t|
     t.string   "title"
@@ -34,6 +45,15 @@ ActiveRecord::Schema.define(version: 20141220203221) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pictures", force: true do |t|
+    t.string   "image"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pictures", ["question_id"], name: "index_pictures_on_question_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.integer  "game_id"
@@ -50,9 +70,10 @@ ActiveRecord::Schema.define(version: 20141220203221) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "answer_text",                         default: "",  null: false
+    t.string   "answer_text",                               default: "",  null: false
     t.integer  "answer_id"
-    t.decimal  "mark_score",  precision: 7, scale: 2, default: 0.0
+    t.decimal  "mark_score",        precision: 7, scale: 2, default: 0.0
+    t.string   "normalized_answer"
   end
 
   add_index "user_answers", ["answer_id"], name: "index_user_answers_on_answer_id", using: :btree

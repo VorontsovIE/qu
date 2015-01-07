@@ -52,11 +52,13 @@ ru:
       answer:
         question: 'Вопрос'
         answer_text: 'Ответ'
+        normalized_answer: 'Ответ'
         mark_score: 'Балл'
         answer_group: 'Номер группы ответов'
       user_answer:
         answer: 'Угаданный вариант ответа'
         answer_text: 'Ответ'
+        normalized_answer: 'Ответ'
         user: 'Пользователь'
         question: 'Вопрос'
         mark_score: 'Балл'

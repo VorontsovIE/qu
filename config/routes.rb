@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :documents
+
   # devise_for :users
   devise_for :users, skip: :registrations
   devise_scope :user do
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :answers
   resources :user_answers
+  resources :pictures
 
   resources :questions do
     member do

@@ -2,6 +2,7 @@
 = admin_only do
   = edit_link_icon edit_question_path(@question)
   = delete_link_icon question_path(@question)
+.time_from_now= @question.game.time_from_now
 %span.game
   = surround '(', ')' do
     Вопрос используется в игре:
@@ -11,11 +12,26 @@
   %b Текст вопроса:
   %pre= @question.question_text
 
+- if @question.pictures.size > 0
+  .pictures
+    - @question.pictures.each do |picture|
+      .picture.inline-block
+        = link_to picture.image.url do 
+          = image_tag picture.image, width: 200
+
+- if @question.documents.size > 0
+  %p
+    %b Приложенные файлы:
+  %ul.documents
+    - @question.documents.each do |document|
+      %li.document= link_to document.filename, document.file.url
+
 - player_only do
-  = simple_form_for UserAnswer.new(question_id: @question.id), as: :user_answer, url: answer_question_path(@question) do |f|
-    = f.input :question_id, as: :hidden
-    = f.input :answer_text
-    = f.submit 'Ответить'
+  - if @question.game.started? && ! @question.game.finished?
+    = simple_form_for UserAnswer.new(question_id: @question.id), as: :user_answer, url: answer_question_path(@question) do |f|
+      = f.input :question_id, as: :hidden
+      = f.input :answer_text
+      = f.submit 'Ответить'
 
   = render partial: 'user_answers', locals: {question: @question, user: current_user}
 

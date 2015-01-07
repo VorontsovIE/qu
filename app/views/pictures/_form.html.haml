@@ -1,0 +1,12 @@
+.current_picture
+  = image_tag @picture.image
+
+= simple_form_for(@picture) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :question, label_method: ->(question) { truncate(question.question_text, length: 30) }
+    = f.input :image
+
+  .form-actions
+    = f.button :submit

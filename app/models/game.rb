@@ -1,5 +1,12 @@
 class Game < ActiveRecord::Base
   has_many :questions, -> { order("position ASC") }, inverse_of: :game
+  has_many :user_answers, through: :questions
+
+  validate :finish_later_than_start
+
+  def finish_later_than_start
+    errors.add(:finish, 'Время окончания должно быть позднее времени старта') unless start < finish
+  end
 
   def started?
     Time.now >= start

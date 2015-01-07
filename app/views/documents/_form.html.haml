@@ -1,0 +1,10 @@
+= simple_form_for(@document) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :file
+    = f.input :filename
+    = f.association :question, label_method: ->(question) { truncate(question.question_text, length: 30) }
+
+  .form-actions
+    = f.button :submit

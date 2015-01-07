@@ -20,3 +20,19 @@
   width: 100px;
   display: inline-block;
 }
+
+.pictures {
+  margin-top: 10px;
+  .picture {margin: 5px;}
+}
+
+.new_picture {
+  margin-top:15px;
+}
+
+.question_text {
+  pre {
+    word-break: break-word;
+    white-space: pre-line;
+  }
+}

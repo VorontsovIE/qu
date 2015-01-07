@@ -1,0 +1,13 @@
+%p#notice= notice
+
+%p
+  %b Файл:
+  = link_to @document.filename, @document.file.url
+%p
+  %b К вопросу:
+  = link_to question_path(@document.question) do
+    = @document.question.short_text(length: 140)
+
+= link_to 'Edit', edit_document_path(@document)
+\|
+= link_to 'Back', documents_path

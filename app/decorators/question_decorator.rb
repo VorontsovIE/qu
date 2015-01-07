@@ -3,6 +3,8 @@ class QuestionDecorator < Draper::Decorator
   decorates_association :answers
   decorates_association :game
   decorates_association :user_answers
+  decorates_association :pictures
+  decorates_association :questions
 
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:

@@ -1,0 +1,11 @@
+%p#notice= notice
+
+= link_to question_path(@picture.question) do
+  = @picture.question.short_text(length: 140)
+%p
+  %b Image:
+  = image_tag @picture.image
+
+= link_to 'Edit', edit_picture_path(@picture)
+\|
+= link_to 'Back', pictures_path

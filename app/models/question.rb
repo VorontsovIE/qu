@@ -5,6 +5,9 @@ class Question < ActiveRecord::Base
   has_many :answers, inverse_of: :question, dependent: :destroy
   has_many :user_answers, -> { order("created_at DESC") }, inverse_of: :question, dependent: :destroy
 
+  has_many :pictures
+  has_many :documents
+
   def new_answer_group_index
     (answers.map(&:answer_group).max || 0) + 1
   end

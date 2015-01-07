@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_admin!, except: [:index, :show, :results]
+  before_action :authenticate!, except: [:index]
   before_action :set_game, only: [:show, :edit, :update, :destroy, :results, :user_results]
   before_action :check_game_open!, only: [:show, :edit, :update, :destroy]
 

@@ -30,7 +30,7 @@ gem 'spring',        group: :development
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -56,3 +56,7 @@ gem 'acts_as_list'
 gem 'draper'
 gem 'russian'
 gem 'pg'
+
+gem 'carrierwave'
+gem 'mime-types'
+gem 'mini_magick', github: 'minimagick/minimagick'

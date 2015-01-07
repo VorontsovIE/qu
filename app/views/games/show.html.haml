@@ -4,15 +4,17 @@
 
 = leadeboard_link_icon results_game_path(@game)
 
+
 %p
   %b Название игры:
   = @game.title
 %p
   %b Начало:
-  = @game.start
+  = l @game.start
 %p
   %b Конец:
-  = @game.finish
+  = l @game.finish
+.time_from_now= @game.time_from_now
 
 %hr
 

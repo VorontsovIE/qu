@@ -4,7 +4,12 @@ class UserAnswersController < ApplicationController
   # GET /user_answers
   # GET /user_answers.json
   def index
-    @user_answers = UserAnswer.all.decorate
+    if params[:game_id]
+      @user_answers = Game.find(params[:game_id]).user_answers.decorate
+      # UserAnswer.where(game: params[:game_id]).order('created_at DESC').all.decorate
+    else
+      @user_answers = UserAnswer.order('created_at DESC').all.decorate
+    end
   end
 
   # GET /user_answers/1

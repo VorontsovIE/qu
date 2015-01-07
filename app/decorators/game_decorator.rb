@@ -14,4 +14,13 @@ class GameDecorator < Draper::Decorator
     h.link_to object.title, object
   end
 
+  def time_from_now
+    if !started?
+      "До начала игры осталось #{h.distance_of_time_in_words(Time.now, start)}"
+    elsif !finished?
+      "До окончания игры осталось #{h.distance_of_time_in_words(Time.now, finish)}"
+    else
+      "Игра окончена"
+    end
+  end
 end

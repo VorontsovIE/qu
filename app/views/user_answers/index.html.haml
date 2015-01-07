@@ -9,6 +9,7 @@
       %th
       %th
       %th
+      %th
       
   %tbody
     - @user_answers.each do |user_answer|
@@ -16,6 +17,12 @@
         %td.user_answer_text
           = link_to user_answer do
             .filler= user_answer.answer_colored
+        %td
+          = link_to user_answer.question.game do
+            = user_answer.question.game.title
+        %td
+          = link_to user_answer.question do
+            = user_answer.question_text(length: 50)
         %td= user_answer.mark_score
         %td= user_answer.user_link
         %td= edit_link_icon edit_user_answer_path(user_answer)
