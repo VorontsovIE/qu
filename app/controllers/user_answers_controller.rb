@@ -10,7 +10,14 @@ class UserAnswersController < ApplicationController
     else
       @user_answers = UserAnswer.order('created_at DESC')
     end
-    @user_answers = @user_answers.limit(params[:limit].to_i)  if params[:limit]
+
+    if params[:limit]
+      unless params[:limit].to_s.downcase == 'all'
+        @user_answers = @user_answers.limit(params[:limit].to_i)
+      end
+    else
+      @user_answers = @user_answers.limit(30)  # default limit
+    end
     @user_answers = @user_answers.decorate
   end
 
