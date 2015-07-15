@@ -30,7 +30,7 @@
   - if @question.game.started? && ! @question.game.finished?
     = simple_form_for UserAnswer.new(question_id: @question.id), as: :user_answer, url: answer_question_path(@question) do |f|
       = f.input :question_id, as: :hidden
-      = f.input :answer_text
+      = f.input :answer_text, input_html: {id: 'question_answer'}
       = f.submit 'Ответить'
 
   = render partial: 'user_answers', locals: {question: @question, user: current_user}
